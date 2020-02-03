@@ -23,19 +23,13 @@ video {                                          /*found this code that initiali
     grid-template-rows: 1fr 3fr 3fr  3fr 3fr 3fr 3fr;
     margin: 3em auto;
     user-select: none;
-}
-
-#memM {
-    text-align: left;
-    font-family: 'Share Tech Mono', monospace;
-    grid-area: 1/1/2/2;
-    font-size: 1.5em;
+    overflow: hidden;
 }
 
 #calcProcess {
     text-align: right;
     font-family: 'Share Tech Mono', monospace;
-    grid-area: 1/2/2/6;
+    grid-area: 1/1/2/6;
     font-size: 1.5em;
 }
 
