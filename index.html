@@ -1,5 +1,5 @@
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" user-scalable=no>
     <link   rel = "stylesheet" type = "text/css" href = "styles.css">
     <link   href="https://fonts.googleapis.com/css?family=Share+Tech+Mono&display=swap" rel="stylesheet"> 
     <link   href="https://fonts.googleapis.com/css?family=Roboto+Mono&display=swap" rel="stylesheet">
@@ -14,27 +14,27 @@
         <label onclick="memRecall()">MR</label>   <!---->
         <label onclick="memAdd()">M+</label>          <!---->
         <label id="memStatus">M</label> <!-- Larger button as per calculator -->
-        <label onclick="infinity()">∞</label>          <!---->
+        <label onclick="operate(' /')">÷</label>       <!-- Send operation into function -->
         <label onclick="sqRt()">√</label>              <!-- Square root current number -->
         <label onclick="newNum('7')">7</label>
         <label onclick="newNum('8')">8</label>
         <label onclick="newNum('9')">9</label>
-        <label onclick="operate(' /')">÷</label>       <!-- Send operation into function -->
+        <label onclick="operate(' *')">×</label>
         <label onclick="invSign()">+/-</label>         <!-- Inverse the current sign -->
         <label onclick="newNum('4')">4</label>
         <label onclick="newNum('5')">5</label>
         <label onclick="newNum('6')">6</label>
-        <label onclick="operate(' *')">×</label>
+        <label onclick="operate(' -')">-</label>
         <label onclick="backspace()">⌫</label>        <!-- Remove last input -->
         <label onclick="newNum('1')">1</label>
         <label onclick="newNum('2')">2</label>
         <label onclick="newNum('3')">3</label>
-        <label onclick="operate(' -')">-</label>
+        <label onclick="operate(' +')">+</label> 
         <label onclick="allClear()">AC</label>         <!-- Reset calculator -->
         <label onclick="newNum('0')">0</label>
         <label onclick="addDec()">.</label>            <!-- Add decimal point --> 
+        <label onclick="infinity()">∞</label>          <!---->
         <label onclick="calculate()">=</label>         <!-- Calculate -->
-        <label onclick="operate(' +')">+</label> <!-- Larger button as per calculator -->
     </span>
     <script src="script.js"></script>
 </main>

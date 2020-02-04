@@ -31,7 +31,7 @@ function operate(op) {
         }
         else {processText = processText.slice(0,processText.length-2) + op;}
     }
-    else {
+    else if (currentNumber !== '0.') {
         calculate();
         calcComplete = false;
         processText = sign + currentNumber + op;
@@ -69,7 +69,7 @@ function addDec() {
 function memAdd() {
     calculate();
     memStore = currentNumber;
-    document.getElementById("memStatus").style.color = 'lightgreen';
+    document.getElementById("memStatus").style.color = 'rgb(47, 231, 47)';
     calcComplete = true;
 }
 
