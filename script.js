@@ -1,4 +1,5 @@
-let currentNumber, processText, decInNumber, calcComplete, sign;
+let currentNumber, processText, decInNumber, calcComplete, sign, 
+memFull = false, memStore = 0;
 
 allClear();
 
@@ -65,19 +66,39 @@ function addDec() {
     decInNumber = true;
 }
 
+function memAdd() {
+    calculate();
+    memStore = currentNumber;
+    document.getElementById("memStatus").style.color = 'lightgreen';
+    calcComplete = true;
+}
+
+function memRecall() {
+    if (memStore !== 0) {
+        currentNumber = memStore;
+        updateScreen();
+        calcComplete = true;
+    }
+}
+
+function memClear() {
+    memStore = 0;
+    document.getElementById("memStatus").style.color = 'tomato';
+}
+
 function backspace(){
     if (calcComplete || currentNumber == 0) {allClear()}
+    else if (currentNumber == 'Infinity') {currentNumber = 0;}
     else {
         if (currentNumber.length > 1) {
             currentNumber = currentNumber.slice(0,currentNumber.length-1);
-            updateScreen();
             decInNumber = currentNumber.indexOf('.') === -1 ? false : true;
         }
         else {
             currentNumber = '0';
-            updateScreen();
         }  
     } 
+    updateScreen();
 }
 
 function sqRt() {
@@ -113,6 +134,12 @@ function calculate() {
         }
         processText = '';
         updateScreen();
+        if (isNaN(currentNumber)) {
+            currentNumber = 'Stop it.';
+            sign = '';
+            updateScreen();
+            currentNumber = 0;
+        }
         calcComplete = true;
     }
 }
@@ -120,6 +147,7 @@ function calculate() {
 function infinity() {
     currentNumber = 'Infinity';
     updateScreen();
+    calcComplete = true;
 }
 
 document.onkeydown = function(event) {
@@ -129,6 +157,5 @@ document.onkeydown = function(event) {
     else if (event.key === 'Backspace') {backspace()}
     else if (event.key === 'Escape' || event.key === 'Delete') {allClear()}
     else if (event.key === 'Enter' || event.key === '=') {calculate()}
+    else if (event.key === 'm') {memAdd()}
 }
-
-// add memory functionality...
