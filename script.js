@@ -25,18 +25,17 @@ function invSign() {
 
 function operate(op) {
     if ((currentNumber === '0' || currentNumber === '0.') && processText !== '') {
-        processText = processText.slice(0,processText.length-2) + op;
-    } 
-    else {
-        if ((processText.slice((length-1)) === '-') && (sign === '-')) {
-            processText = processText.slice(0,processText.length-1) + '+';
-            sign = '';
+        if (op === ' -') {
+            invSign();
         }
+        else {processText = processText.slice(0,processText.length-2) + op;}
+    }
+    else {
         calculate();
         calcComplete = false;
         processText = sign + currentNumber + op;
-        currentNumber = '0';
         sign = '';
+        currentNumber = '0';
         decInNumber = false;
     }
     updateScreen();
@@ -44,6 +43,7 @@ function operate(op) {
 
 function newNum(n){
     if (currentNumber === '0' || calcComplete == true) {
+        if (processText === '') {sign = '';}
         currentNumber = n;
         calcComplete = false;
     } 
@@ -66,7 +66,7 @@ function addDec() {
 }
 
 function backspace(){
-    if (calcComplete) {allClear()}
+    if (calcComplete || currentNumber == 0) {allClear()}
     else {
         if (currentNumber.length > 1) {
             currentNumber = currentNumber.slice(0,currentNumber.length-1);
@@ -98,6 +98,10 @@ function sqRt() {
 }
 
 function calculate() {
+    if ((processText.slice((length-1)) === '-') && (sign === '-')) {
+        processText = processText.slice(0,processText.length-1) + '+';
+        sign = '';
+    }
     if (currentNumber !== '0' && currentNumber !== '0.'){
         currentNumber = eval(processText + sign + currentNumber);
         if (currentNumber >= 0){
@@ -111,6 +115,11 @@ function calculate() {
         updateScreen();
         calcComplete = true;
     }
+}
+
+function infinity() {
+    currentNumber = 'Infinity';
+    updateScreen();
 }
 
 document.onkeydown = function(event) {
