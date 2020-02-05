@@ -4,18 +4,18 @@ memFull = false, memStore = 0;
 allClear();
 
 function allClear() {
+    processText   = '';
+    sign          = '';
     currentNumber = '0';
-    processText = '';
-    decInNumber = false;
-    calcComplete = true;
-    sign = '';
+    decInNumber   = false;
+    calcComplete  = true;
     updateScreen();
 }
 
 function updateScreen() {
     document.getElementById("calcProcessText").innerHTML = processText;
-    document.getElementById("currentSign").innerHTML = sign;
-    document.getElementById("calcScreenText").innerHTML = currentNumber;
+    document.getElementById("currentSign").innerHTML     = sign;
+    document.getElementById("calcScreenText").innerHTML  = currentNumber;
 }
 
 function invSign() {
@@ -33,11 +33,11 @@ function operate(op) {
     }
     else if (currentNumber !== '0.') {
         calculate();
-        calcComplete = false;
-        processText = sign + currentNumber + op;
-        sign = '';
+        processText   = sign + currentNumber + op;
+        sign          = '';
         currentNumber = '0';
-        decInNumber = false;
+        decInNumber   = false;
+        calcComplete  = false;
     }
     updateScreen();
 }
@@ -46,7 +46,7 @@ function newNum(n){
     if (currentNumber === '0' || calcComplete == true) {
         if (processText === '') {sign = '';}
         currentNumber = n;
-        calcComplete = false;
+        calcComplete  = false;
     } 
     else {
         currentNumber = currentNumber + n;
@@ -66,18 +66,20 @@ function addDec() {
     decInNumber = true;
 }
 
-function memAdd() {
-    calculate();
-    memStore = currentNumber;
-    document.getElementById("memStatus").style.color = 'rgb(47, 231, 47)';
-    calcComplete = true;
+function memAdd() { //add animation of number floating into memory
+    if (currentNumber !== '0') {
+        calculate();
+        document.getElementById("memStatus").style.color = 'LimeGreen';
+        memStore     = currentNumber;
+        calcComplete = true;
+    }
 }
 
-function memRecall() {
+function memRecall() { // reverse animation for number to return to screen?
     if (memStore !== 0) {
         currentNumber = memStore;
+        calcComplete  = true;
         updateScreen();
-        calcComplete = true;
     }
 }
 
@@ -92,7 +94,7 @@ function backspace(){
     else {
         if (currentNumber.length > 1) {
             currentNumber = currentNumber.slice(0,currentNumber.length-1);
-            decInNumber = currentNumber.indexOf('.') === -1 ? false : true;
+            decInNumber   = currentNumber.indexOf('.') === -1 ? false : true;
         }
         else {
             currentNumber = '0';
@@ -105,12 +107,12 @@ function sqRt() {
     if (currentNumber !== 0) {
         calculate();
         if (sign === '-') {
-            processText = 'Not an imaginary calculator';
+            processText  = 'Not an imaginary calculator';
             calcComplete = false;
         }
         else {
+            processText   = '';
             currentNumber = Math.pow(currentNumber, 0.5)
-            processText = '';
         }
         updateScreen();
         processText = '';
@@ -118,10 +120,10 @@ function sqRt() {
     }
 }
 
-function calculate() {
+function calculate() { //round number to 8 (9?) characters
     if ((processText.slice((length-1)) === '-') && (sign === '-')) {
         processText = processText.slice(0,processText.length-1) + '+';
-        sign = '';
+        sign        = '';
     }
     if (currentNumber !== '0' && currentNumber !== '0.'){
         currentNumber = eval(processText + sign + currentNumber);
@@ -135,8 +137,8 @@ function calculate() {
         processText = '';
         updateScreen();
         if (isNaN(currentNumber)) {
+            sign          = '';
             currentNumber = 'Stop it.';
-            sign = '';
             updateScreen();
             currentNumber = 0;
         }
@@ -146,16 +148,16 @@ function calculate() {
 
 function infinity() {
     currentNumber = 'Infinity';
+    calcComplete  = true;
     updateScreen();
-    calcComplete = true;
 }
 
 document.onkeydown = function(event) {
-    if ((event.key >= 0) && (event.key < 10) && (event.key !== ' ')) {newNum(event.key);}
-    else if (event.key === '.') {addDec()}
-    else if (event.key === '+' || event.key === '-' || event.key === '*' || event.key === '/') {operate(` ${event.key}`)}
-    else if (event.key === 'Backspace') {backspace()}
-    else if (event.key === 'Escape' || event.key === 'Delete') {allClear()}
-    else if (event.key === 'Enter' || event.key === '=') {calculate()}
-    else if (event.key === 'm') {memAdd()}
+    if ((event.key >= 0) && (event.key < 10) && (event.key !== ' '))                                {newNum(event.key);}
+    else if (event.key === '.')                                                                     {addDec()}
+    else if (event.key === '+'      || event.key === '-' || event.key === '*' || event.key === '/') {operate(` ${event.key}`)}
+    else if (event.key === 'Backspace')                                                             {backspace()}
+    else if (event.key === 'Escape' || event.key === 'Delete')                                      {allClear()}
+    else if (event.key === 'Enter'  || event.key === '=')                                           {calculate()}
+    else if (event.key === 'm')                                                                     {memAdd()}
 }
