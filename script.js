@@ -3,7 +3,7 @@ memFull = false, memStore = 0;
 
 allClear();
 
-function allClear() {
+function allClear() { //toggle hard mode (long press)
     processText   = '';
     sign          = '';
     currentNumber = '0';
@@ -28,6 +28,7 @@ function operate(op) {
     if ((currentNumber === '0' || currentNumber === '0.') && processText !== '') {
         if (op === ' -') {
             invSign();
+            calcComplete = false;
         }
         else {processText = processText.slice(0,processText.length-2) + op;}
     }
@@ -42,13 +43,12 @@ function operate(op) {
     updateScreen();
 }
 
-function newNum(n){
-    if (currentNumber === '0' || calcComplete == true) {
-        if (processText === '') {sign = '';}
+function newNum(n){//new numbers keep negativity
+    if ((currentNumber.length < 9 && currentNumber === '0') || calcComplete == true) {
         currentNumber = n;
         calcComplete  = false;
     } 
-    else {
+    else if (currentNumber.length < 9) {
         currentNumber = currentNumber + n;
     }
     updateScreen();
@@ -67,7 +67,7 @@ function addDec() {
 }
 
 function memAdd() { //add animation of number floating into memory
-    if (currentNumber !== '0') {
+    if (currentNumber !== 0 && currentNumber !== '0' && currentNumber !== 'Stop it.') {
         calculate();
         document.getElementById("memStatus").style.color = 'LimeGreen';
         memStore     = currentNumber;
@@ -89,7 +89,7 @@ function memClear() {
 }
 
 function backspace(){
-    if (calcComplete || currentNumber == 0) {allClear()}
+    if (calcComplete || currentNumber === '0') {allClear()}
     else if (currentNumber == 'Infinity') {currentNumber = 0;}
     else {
         if (currentNumber.length > 1) {
@@ -103,28 +103,29 @@ function backspace(){
     updateScreen();
 }
 
-function sqRt() {
+function sqRt() { 
     if (currentNumber !== 0) {
         calculate();
         if (sign === '-') {
-            processText  = 'Not an imaginary calculator';
-            calcComplete = false;
+            processText  = 'Not an imaginary calculator'; //negative infinity
         }
         else {
             processText   = '';
             currentNumber = Math.pow(currentNumber, 0.5)
         }
+        roundNumber();
         updateScreen();
         processText = '';
         calcComplete = true;
     }
 }
 
-function calculate() { //round number to 8 (9?) characters
+function calculate() {
     if ((processText.slice((length-1)) === '-') && (sign === '-')) {
         processText = processText.slice(0,processText.length-1) + '+';
         sign        = '';
     }
+    
     if (currentNumber !== '0' && currentNumber !== '0.'){
         currentNumber = eval(processText + sign + currentNumber);
         if (currentNumber >= 0){
@@ -134,8 +135,10 @@ function calculate() { //round number to 8 (9?) characters
             currentNumber = Math.abs(currentNumber);
             sign = '-';
         }
+        roundNumber();
         processText = '';
         updateScreen();
+    
         if (isNaN(currentNumber)) {
             sign          = '';
             currentNumber = 'Stop it.';
@@ -146,8 +149,22 @@ function calculate() { //round number to 8 (9?) characters
     }
 }
 
-function infinity() {
-    currentNumber = 'Infinity';
+function roundNumber(){
+    if (currentNumber < 1) {
+        currentNumber = +currentNumber.toFixed(7)
+    }
+    else if (currentNumber > 99999999) {
+        currentNumber = currentNumber.toPrecision(5)
+    }
+    else if (currentNumber == 'Infinity'){}
+    else {
+        currentNumber = +currentNumber.toPrecision(8)
+    }
+}
+
+function infinity() { //toggle hard mode (long press)
+    sign = '';
+    currentNumber = Infinity;
     calcComplete  = true;
     updateScreen();
 }
