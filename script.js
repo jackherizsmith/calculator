@@ -107,7 +107,7 @@ function sqRt() {
     if (currentNumber !== 0) {
         calculate();
         if (sign === '-') {
-            processText  = 'Not an imaginary calculator'; //negative infinity
+            processText  = 'Not an imaginary calculator'; //negative infinity doesn't work
         }
         else {
             processText   = '';
