@@ -150,15 +150,16 @@ function calculate() {
 }
 
 function roundNumber(){
-    if (currentNumber < 1) {
-        currentNumber = +currentNumber.toFixed(7)
-    }
-    else if (currentNumber > 99999999) {
-        currentNumber = currentNumber.toPrecision(5)
-    }
-    else if (currentNumber == 'Infinity'){}
-    else {
-        currentNumber = +currentNumber.toPrecision(8)
+    if (currentNumber !== 'Infinity'){
+        if (currentNumber < 1) {
+            currentNumber = +currentNumber.toFixed(7)
+        }
+        else if (currentNumber > 99999999) {
+            currentNumber = currentNumber.toPrecision(5)
+        }
+        else {
+            currentNumber = +currentNumber.toPrecision(8)
+        }
     }
 }
 
