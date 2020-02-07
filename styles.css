@@ -11,17 +11,19 @@ video {                                          /*found this code that initiali
 	padding: 0;
     font:           inherit;
 	font-size:      100%;
-	vertical-align: baseline;
+    vertical-align: baseline;
+    background-color: #FFFFF0;
 }
 
-#calculator {
+#calculatorBody {
     width: 80%;
     max-width: 400px;
     height: 80%;
+    min-height: 300px;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
     grid-template-rows: 1.5fr 3fr 3fr  3fr 3fr 3fr 3fr;
-    margin: 3em auto;
+    margin: 2em auto;
     user-select: none;
     overflow: hidden;
 }
@@ -56,13 +58,15 @@ label {
 }
 
 #memStatus { /*need to animate for user feedback*/
-    color: tomato;
+    background-color: #B11100;
+    color: white;
 }
 
 @media only screen and (max-width: 450px) {
     
     #calculator {
         grid-template-rows: 1fr 2fr 3fr  3fr 3fr 3fr 3fr;
+        width: 90%;
     }
 
     #calcProcess {
@@ -88,9 +92,5 @@ label {
 @media only screen and (min-width: 450px) {
     label:hover {
         background-color: lightgreen;
-    }
-
-    #memStatus:hover {
-        background-color: transparent;
     }
 }
