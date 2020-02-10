@@ -3,7 +3,8 @@ const   gridPoints = [[3,1],[3,2],[3,3],[3,4],[3,5],
                       [5,1],[5,2],[5,3],[5,4],[5,5],
                       [6,1],[6,2],[6,3],[6,4],[6,5],
                       [7,1],[7,2],[7,3],[7,4],[7,5]],
-        numbers = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24]; // for hard mode...
+        numbers =     [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9,10,11,
+                       12,13,14,15,16,17,18,19,20,21,22,23,24]; // for hard mode...
 let currentNumber, processText, decInNumber, calcComplete, sign, arrayPosition,
 memFull = false, memStore = 0, hardMode = false;
 
@@ -15,12 +16,12 @@ function allClear() {
     currentNumber = '0';
     decInNumber   = false;
     calcComplete  = true;
-    updateScreen();
+    updateDisplay();
 }
 
 // MAKING THE DISPLAY WORK
 
-function updateScreen() {
+function updateDisplay() {
     document.getElementById("calcProcessText").innerHTML = processText;
     document.getElementById("currentSign").innerHTML     = sign;
     document.getElementById("calcScreenText").innerHTML  = currentNumber;
@@ -81,11 +82,12 @@ function roundNumber(){
 function invSign() {
     if (sign === '') {sign = '-'}
     else {sign = ''}
-    updateScreen();
+    calcComplete = false;
+    updateDisplay();
 }
 
 // PROCESSING INPUTS
-
+ 
 function operate(op) {
     if ((currentNumber == 0) && (op === ' -')) {invSign();}
     else if (processText !== '' && op !== ' -') {processText = processText.slice(0,processText.length-2) + op;}
@@ -97,7 +99,7 @@ function operate(op) {
         decInNumber   = false;
     }
     calcComplete = false;
-    updateScreen();
+    updateDisplay();
 }
 
 function newNum(n){
@@ -109,7 +111,7 @@ function newNum(n){
     else if (currentNumber.length < 9) {
         currentNumber = currentNumber + n;
     }
-    updateScreen();
+    updateDisplay();
 }
 
 function addDec() {
@@ -119,7 +121,7 @@ function addDec() {
     }
     else {
         decInNumber ? decInNumber : currentNumber = currentNumber + '.';
-        updateScreen();
+        updateDisplay();
     }
     decInNumber = true;
 }
@@ -127,7 +129,7 @@ function addDec() {
 function infinity() {
     currentNumber = Infinity;
     calcComplete  = true;
-    updateScreen();
+    updateDisplay();
 }
 
 // MEMORY FUNCTIONS
@@ -149,7 +151,7 @@ function memRecall() { // reverse animation for number to return to screen?
         }
         else {currentNumber = memStore;}
         calcComplete  = true;
-        updateScreen();
+        updateDisplay();
     }
 }
 
@@ -170,7 +172,7 @@ function backspace(){
             currentNumber = '0';
         }  
     } 
-    updateScreen();
+    updateDisplay();
 }
 
 // MAKING CALCULATIONS
@@ -186,7 +188,7 @@ function sqRt() {
             currentNumber = Math.pow(currentNumber, 0.5);
             roundNumber();
         }
-        updateScreen();
+        updateDisplay();
         processText = '';
         calcComplete = true;
     }
@@ -210,12 +212,12 @@ function calculate() {
         roundNumber();
         processText = '';
         if (currentNumber == 42) {hardMode = !hardMode}
-        updateScreen();
+        updateDisplay();
     
         if (isNaN(currentNumber)) {
             sign          = '';
             currentNumber = 'Stop it.';
-            updateScreen();
+            updateDisplay();
             currentNumber = 0;
         }
         calcComplete = true;
