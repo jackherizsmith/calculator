@@ -87,11 +87,11 @@ function invSign() {
 }
 
 // PROCESSING INPUTS
- 
+
 function operate(op) {
     if ((currentNumber == 0) && (op === ' -')) {invSign();}
-    else if (processText !== '' && op !== ' -') {processText = processText.slice(0,processText.length-2) + op;}
-    else if (currentNumber !== '0.') {
+    else if (processText !== '' && currentNumber == 0) {processText = processText.slice(0,processText.length-2) + op;}
+    if (currentNumber > 0) {//somewhere here when current number != 0, an operation needs to calculate
         calculate();
         processText   = sign + currentNumber + op;
         sign          = '';
@@ -127,9 +127,11 @@ function addDec() {
 }
 
 function infinity() {
-    currentNumber = Infinity;
-    calcComplete  = true;
-    updateDisplay();
+    if (currentNumber == 0) {
+        currentNumber = Infinity;
+        calcComplete  = true;
+        updateDisplay();
+    }
 }
 
 // MEMORY FUNCTIONS
