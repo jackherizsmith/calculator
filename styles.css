@@ -16,17 +16,14 @@ video {                                          /*found this code that initiali
 }
 
 #calculatorBody {
-    width: 80%;
-    max-width: 400px;/*use rem*/
-    height: 80%;
-    min-height: 300px;
+    max-width: 24.8rem;
+    min-height: 38rem;
     position: relative;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
     grid-template-rows: 1.5fr 3fr 3fr  3fr 3fr 3fr 3fr;
     margin: 2em auto;
     user-select: none;
-    overflow-x: hidden;
 }
 
 #calcProcess {
@@ -50,6 +47,11 @@ video {                                          /*found this code that initiali
     font-size: 60px;
 }
 
+#memStatus { /*need to animate for user feedback*/
+    background-color: #B11100;
+    color: white;
+}
+
 label {
     font-family: 'Roboto Mono', monospace;
     display: flex;
@@ -58,17 +60,13 @@ label {
     font-size: 40px;
 }
 
-#memStatus { /*need to animate for user feedback*/
-    background-color: #B11100;
-    color: white;
-    grid-area: 3 / 1 / span 1 / span 1;
-}
-
 @media only screen and (max-width: 28.2rem) {
     
-    #calculator {
+    #calculatorBody {
         grid-template-rows: 1fr 2fr 3fr  3fr 3fr 3fr 3fr;
         width: 90%;
+        max-width: 20rem;
+        min-height: 32.4rem;
     }
 
     #calcProcess {

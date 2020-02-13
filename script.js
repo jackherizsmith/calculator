@@ -5,7 +5,7 @@ const   gridPoints = [[3,1],[3,2],[3,3],[3,4],[3,5],
                       [7,1],[7,2],[7,3],[7,4],[7,5]],
         numbers =     [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9,10,11,
                        12,13,14,15,16,17,18,19,20,21,22,23,24]; // for hard mode...
-let currentNumber, processText, decInNumber, calcComplete, sign, arrayPosition,
+let currentNumber, processText, calcComplete, sign, arrayPosition,
 memFull = false, memStore = 0, hardMode = false;
 
 allClear();
@@ -14,7 +14,6 @@ function allClear() {
     processText   = '';
     sign          = '';
     currentNumber = '0';
-    decInNumber   = false;
     calcComplete  = true;
     updateDisplay();
 }
@@ -91,12 +90,11 @@ function invSign() {
 function operate(op) {
     if ((currentNumber == 0) && (op === ' -')) {invSign();}
     else if (processText !== '' && currentNumber == 0) {processText = processText.slice(0,processText.length-2) + op;}
-    if (currentNumber > 0) {//somewhere here when current number != 0, an operation needs to calculate
+    if (currentNumber > 0) {
         calculate();
         processText   = sign + currentNumber + op;
         sign          = '';
         currentNumber = '0';
-        decInNumber   = false;
     }
     calcComplete = false;
     updateDisplay();
@@ -120,14 +118,13 @@ function addDec() {
         newNum('0.')
     }
     else {
-        decInNumber ? decInNumber : currentNumber = currentNumber + '.';
+        (currentNumber.indexOf('.') === -1) ? currentNumber = currentNumber + '.' : currentNumber;
         updateDisplay();
     }
-    decInNumber = true;
 }
 
 function infinity() {
-    if (currentNumber == 0) {
+    if (currentNumber == 0 || calcComplete) {
         currentNumber = Infinity;
         calcComplete  = true;
         updateDisplay();
@@ -148,10 +145,9 @@ function memAdd() { //add animation to memStatus. Set CSSKeyFrameRule(?) to grow
 function memRecall() { // reverse animation for number to return to screen?
     if (memStore !== 0) {
         if (memStore < 0) {
-            sign = '-';
-            currentNumber = -memStore;
+            invSign();
         }
-        else {currentNumber = memStore;}
+        currentNumber = Math.abs(memStore);
         calcComplete  = true;
         updateDisplay();
     }
@@ -163,12 +159,11 @@ function memClear() {
 }
 
 function backspace(){
-    if (calcComplete || currentNumber === '0') {allClear()}
+    if (calcComplete || currentNumber == '0') {allClear()}
     else if (currentNumber == 'Infinity') {currentNumber = 0;}
     else {
         if (currentNumber.length > 1) {
             currentNumber = currentNumber.slice(0,currentNumber.length-1);
-            decInNumber   = currentNumber.indexOf('.') === -1 ? false : true;
         }
         else {
             currentNumber = '0';
