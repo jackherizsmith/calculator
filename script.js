@@ -102,7 +102,7 @@ function operate(op) {
 
 function newNum(n){
     if (calcComplete == true) {sign = '';}
-    if (currentNumber === '0' || calcComplete == true) {
+    if (currentNumber == '0' || calcComplete == true) {
         currentNumber = n;
         calcComplete  = false;
     } 
