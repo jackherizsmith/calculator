@@ -45,11 +45,13 @@ video {                                          /*found this code that initiali
     font-family: 'Share Tech Mono', monospace;
     grid-area: 2 / 2 / span 1 / span 4;
     font-size: 60px;
+    user-select: all;
 }
 
 #memStatus { /*need to animate for user feedback*/
     background-color: #B11100;
     color: white;
+
 }
 
 label {
