@@ -34,10 +34,11 @@ function updateDisplay() {      // Most functions end by updating the display, t
     chaosMode ? buttonOrder = shuffleArray(buttonIds.slice()) : // In chaos mode this takes button ids from the buttonIds array and shuffles them into buttonOrder
     buttonOrder = buttonIds.slice();                            // If not in chaos mode, buttonOrder is set to the unshuffled buttonIds array
 
-    /* This loops through each button in the newly ordered array and sets it to the next ach position on the calculator, e.g. if the fourth button has been shuffled into
+    /* This loops through each button in the newly ordered array and sets it to the next position on the calculator, e.g. if the fourth button has been shuffled into
        the first position, it will be placed in the grid first. If unshuffled, the first button will be placed first, the second second and so on.                */ 
+    
     for (let i = 0; i < 25; i++){
-        document.getElementById(buttonOrder[i]).style.gridArea = `${gridPoints[i][0]}  / ${gridPoints[i][1]}  / span 1 / span 1`; // Each button spans one row and one column
+        document.getElementById(buttonOrder[i]).style.gridArea = `${gridPoints[i][0]} / ${gridPoints[i][1]} / span 1 / span 1`; // Each button spans one row and one column
     }
 }
 
@@ -121,7 +122,6 @@ function memAdd() { //TODO add animation to memStatus. https://css-tricks.com/co
     if (currentNumber > 0 && currentNumber !== 'Stop it.') {                    // If there's something to save into memory...
         calculate();
         document.getElementById("memStatus").style.backgroundColor = '#33CC00'; // ... set colour of memory status to show when memory is in use and...
-       // document.getElementById("memStatus").style.
         memStore     = sign + currentNumber;                                    // ... store current number
         calcComplete = true;
     }

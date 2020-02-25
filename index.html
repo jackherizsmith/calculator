@@ -14,7 +14,10 @@
         <output id="calcProcess"><p id="calcProcessText"></p></output>      <!-- The calculation / feedback so far -->
         <output id="sign"       ><p id="currentSign"    ></p></output>      <!-- Current sign of number -->
         <output id="calcScreen" ><p id="calcScreenText" ></p></output>      <!-- Current number in calculation -->
-        <label  id="memStatus"                               >M</label>
+        <label  id="memStatus">
+            <div id="updateColour"></div>
+            <div id="m">M</div>
+        </label>
         <label  id="addToMemory"      onclick="memAdd()"     >M+</label> 
         <label  id="recallFromMemory" onclick="memRecall()"  >MR</label>
         <label  id="clearMemory"      onclick="memClear()"   >MC</label>  

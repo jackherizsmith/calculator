@@ -48,10 +48,62 @@ video {                                          /*found this code that initiali
     user-select: all;
 }
 
-#memStatus { /*need to animate for user feedback*/
+#memStatus {
+    height: 100%;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
     background-color: #B11100;
-    color: white;
+}
 
+#m {
+    height: 100%;
+    width: 100%;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    background-color: transparent;
+}
+
+#updateColour {
+    border-radius: 50%;
+    position: absolute;
+}
+
+#updateColour.add-to-memory {
+    animation: remember 1s ease 1 forwards;
+}
+
+@keyframes remember {
+    0% {
+        background-color: lightgreen;
+        height: 0%;
+        width: 0%;
+    }
+    100% {
+        background-color: #33CC00;
+        height: 141.5%;
+        width: 141.5%;
+    }
+}
+
+#updateColour.remove-from-memory {
+    animation: forget 1s ease 1 forwards;
+}
+
+@keyframes forget {
+    0% {
+        height: 0%;
+        width: 0%;
+        background-color:tomato;
+    }
+    100% {
+        height: 141.5%;
+        width: 141.5%;
+        background-color:#B11100;
+    }
 }
 
 label {
