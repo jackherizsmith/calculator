@@ -5,122 +5,125 @@ tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label,
 legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, 
 canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, 
 nav, output, ruby, section, summary, time, mark, audio, 
-video {                                          /*found this code that initialises formatting to help fix unexpected browser bugs*/
+video {                     /* Found this code that initialises formatting to help fix unexpected browser bugs */
     border:  0;
 	margin:  0;
 	padding: 0;
-    font:           inherit;
-	font-size:      100%;
-    vertical-align: baseline;
-    background-color: #FFFFF0;
+    font:             inherit;
+	font-size:        100%;
+    vertical-align:   baseline;
+    background-color: #FFFFF0;  /* Nice background*/
 }
 
 #calculatorBody {
-    max-width: 24.8rem;
-    min-height: 38rem;
-    position: relative;
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-    grid-template-rows: 1.5fr 3fr 3fr  3fr 3fr 3fr 3fr;
-    margin: 2em auto;
-    user-select: none;
+    height:     90%;
+    max-width:  24.8rem;        /* Set calculator's max width         */
+    min-height: 28rem;          /* Set calculator's min height        */
+    display:    grid;           /* Setting up calculator as CSS Grid  */
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;         /* Five equally spaced columns            */
+    grid-template-rows:    1fr 2fr 2fr 2fr 2fr 2fr 2fr; /* Seven rows including a shorter top row */
+    margin:      2em auto;
+    user-select: none;          /* Prevents selecting text on buttons */
 }
 
 #calcProcess {
-    text-align: right;
+    text-align:  right;
     font-family: 'Share Tech Mono', monospace;
-    grid-area: 1 / 1 / span 1 / span 5;
     font-size: 25px;
+    grid-area: 1 / 1 / span 1 / span 5; /* I learned all about grid-area and used this for Chaos Mode (see script.js: line 41) */
 }
 
 #sign {
-    text-align: left;
+    text-align:  left;
     font-family: 'Share Tech Mono', monospace;
-    grid-area: 2 / 1 / span 1 / span 1;
     font-size: 60px;
+    grid-area: 2 / 1 / span 1 / span 1;
 }
 
 #calcScreen {
-    text-align: right;
+    text-align:  right;
     font-family: 'Share Tech Mono', monospace;
-    grid-area: 2 / 2 / span 1 / span 4;
-    font-size: 60px;
-    user-select: all;
+    font-size:   60px;
+    grid-area:   2 / 2 / span 1 / span 4;
+    user-select: all;                           /* Allows user to click number to copy */
+}
+
+label {
+    font-family:      'Roboto Mono', monospace;
+    display:          flex;         /*  */
+    background-color: transparent;
+    justify-content:  center;
+    align-items:      center;
+    font-size:        40px;
 }
 
 #memStatus {
-    height: 100%;
-    width: 100%;
-    position: relative;
-    overflow: hidden;
-    background-color: #B11100;
-}
-
-#m {
-    height: 100%;
-    width: 100%;
-    color: white;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: absolute;
-    background-color: transparent;
+    height:   100%;
+    width:    100%;
+    position: relative;             /* Setting position for children elements to be overlaid        */
+    overflow: hidden;               /* Prevents overlaid animated element from spilling outside box */
+    background-color: #B11100;      /* Colour initialised as memory empty                           */
 }
 
 #updateColour {
-    border-radius: 50%;
-    position: absolute;
+    border-radius: 50%;         /* Circular element                      */
+    position:      absolute;    /* Positioned above '#memStatus' element */
 }
 
 #updateColour.add-to-memory {
-    animation: remember 1s ease 1 forwards;
-}
-
-@keyframes remember {
-    0% {
-        background-color: lightgreen;
-        height: 0%;
-        width: 0%;
-    }
-    100% {
-        background-color: #33CC00;
-        height: 141.5%;
-        width: 141.5%;
-    }
+    animation: remember 0.8s ease-out 1 forwards; /* Class for animating element when adding to memory     */
 }
 
 #updateColour.remove-from-memory {
-    animation: forget 1s ease 1 forwards;
+    animation: forget   0.8s ease-out 1 forwards; /* Class for animating element when removing from memory */
 }
 
-@keyframes forget {
+#m {
+    background-color: transparent;
+    color:     white;
+    position:  absolute;            /* Positioned above '#updateColour' element */
+
+    display:          flex;         /* Ensure this element acts like other labels */
+    justify-content:  center;
+    align-items:      center;
+}
+
+@keyframes remember {                   /* Animation for adding to memory */
+    0% {
+        background-color: lightgreen; /* the colour change indicates when memory is overwritten */
+        height: 0%;
+        width:  0%;
+    }
+
+    100% {
+        background-color: #33CC00;
+        height: 141.5%;                 /* I think this is accurate for getting the edge of the circle to meet the corner of the parent element (i.e. √2 as a percentage) */
+        width:  141.5%;
+    }
+}
+
+@keyframes forget {                     /* Animation to remove from memory */
     0% {
         height: 0%;
-        width: 0%;
+        width:  0%;
         background-color:tomato;
     }
+
     100% {
         height: 141.5%;
-        width: 141.5%;
+        width:  141.5%;
         background-color:#B11100;
     }
 }
 
-label {
-    font-family: 'Roboto Mono', monospace;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 40px;
-}
-
-@media only screen and (max-width: 28.2rem) {
+@media only screen and (max-width: 28.2rem) { /* Adjusting for smaller screens - mostly changing font size */
     
     #calculatorBody {
-        grid-template-rows: 1fr 2fr 3fr  3fr 3fr 3fr 3fr;
-        width: 90%;
-        max-width: 20rem;
-        min-height: 32.4rem;
+        grid-template-rows: 1fr 2fr 3fr  3fr 3fr 3fr 3fr; /* Makes calculator screen slightly shorter */
+        width:  90%;
+        height: 90%;
+        max-width:  20rem;
+        min-height: 24rem;
     }
 
     #calcProcess {
@@ -130,6 +133,7 @@ label {
     #sign{
         font-size: 40px;
     }
+
     #calcScreen {
         font-size: 40px;
     }
@@ -138,13 +142,13 @@ label {
         font-size: 30px;
     }
     
-    label:active {
+    label:active {  /* Reponsive when clicked */
         background-color: lightgreen;
     }
 }
 
 @media only screen and (min-width: 28.3rem) {
-    label:hover {
+    label:hover {   /* Responsive when hovering */
         background-color: lightgreen;
     }
 }

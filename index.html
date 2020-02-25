@@ -1,33 +1,32 @@
 <html lang="en"> 
 <head>
-    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport'/>
-    <title>Calculatiator</title>
-    <link rel="icon" href="calcLogo.png">
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport'/> <!-- I wanted to prevent scaling -->
+    <title>Another calculator</title>       <!-- Title for page -->
+    <link rel="icon" href="calcLogo.png">   <!-- Logo for page  -->
     <link rel = "stylesheet" type = "text/css" href = "styles.css">
     <link href="https://fonts.googleapis.com/css?family=Share+Tech+Mono&display=swap" rel="stylesheet"> 
     <link href="https://fonts.googleapis.com/css?family=Roboto+Mono&display=swap"     rel="stylesheet">
 </head>
 
-<main>
-    <h1 id="calculator"></h1> 
+<main> 
     <span id="calculatorBody">
-        <output id="calcProcess"><p id="calcProcessText"></p></output>      <!-- The calculation / feedback so far -->
-        <output id="sign"       ><p id="currentSign"    ></p></output>      <!-- Current sign of number -->
-        <output id="calcScreen" ><p id="calcScreenText" ></p></output>      <!-- Current number in calculation -->
-        <label  id="memStatus">
-            <div id="updateColour"></div>
+        <output id="calcProcess"><p id="calcProcessText"></p></output>      <!-- The calculation / feedback so far  -->
+        <output id="sign"       ><p id="currentSign"    ></p></output>      <!-- Current sign of number             -->
+        <output id="calcScreen" ><p id="calcScreenText" ></p></output>      <!-- Current number in calculation      -->
+        <label  id="memStatus"><!-- class="tooltip"><span class="tooltiptext"><span id="memoryValue"></span> <!- Background colour for whether a number is stored in memory -->
+            <div id="updateColour"></div>                                   <!-- Middle layer for running animation (see styles.css: lines 68-107) -->
             <div id="m">M</div>
         </label>
-        <label  id="addToMemory"      onclick="memAdd()"     >M+</label> 
-        <label  id="recallFromMemory" onclick="memRecall()"  >MR</label>
-        <label  id="clearMemory"      onclick="memClear()"   >MC</label>  
-        <label  id="backspace"        onclick="backspace()"  >⌫</label>    <!-- Remove last input -->
+        <label  id="addToMemory"      onclick="memAdd()"     >M+</label>    <!-- Add to memory              -->
+        <label  id="recallFromMemory" onclick="memRecall()"  >MR</label>    <!-- Retrieve from memory       -->
+        <label  id="clearMemory"      onclick="memClear()"   >MC</label>    <!-- Clear from memory          -->
+        <label  id="backspace"        onclick="backspace()"  >⌫</label>    <!-- Remove last input          -->
         <label  id="squareRoot"       onclick="sqRt()"       >√</label>     <!-- Square root current number -->
         <label  id="seven"            onclick="newNum('7')"  >7</label>
         <label  id="eight"            onclick="newNum('8')"  >8</label>
         <label  id="nine"             onclick="newNum('9')"  >9</label>
         <label  id="divide"           onclick="operate(' /')">÷</label>     <!-- Send operation into function -->
-        <label  id="inverseSign"      onclick="invSign()"    >+/-</label>   <!-- Inverse the current sign -->
+        <label  id="inverseSign"      onclick="invSign()"    >+/-</label>   <!-- Inverse the current sign     -->
         <label  id="four"             onclick="newNum('4')"  >4</label>
         <label  id="five"             onclick="newNum('5')"  >5</label>
         <label  id="six"              onclick="newNum('6')"  >6</label>
@@ -37,10 +36,10 @@
         <label  id="two"              onclick="newNum('2')"  >2</label>
         <label  id="three"            onclick="newNum('3')"  >3</label>
         <label  id="minus"            onclick="operate(' -')">-</label>
-        <label  id="allClear"         onclick="allClear()"   >AC</label>    <!-- Reset calculator -->
+        <label  id="allClear"         onclick="allClear()"   >AC</label>    <!-- Reset calculator (except memory store) -->
         <label  id="zero"             onclick="newNum('0')"  >0</label>
-        <label  id="addDecimal"       onclick="addDec()"     >.</label>     <!-- Add decimal point --> 
-        <label  id="equals"           onclick="calculate()"  >=</label>     <!-- Calculate -->
+        <label  id="addDecimal"       onclick="addDec()"     >.</label>     <!-- Add (only) decimal point --> 
+        <label  id="equals"           onclick="calculate()"  >=</label>     <!-- Calculate                -->
         <label  id="add"              onclick="operate(' +')">+</label> 
     </span>
     <script src="script.js"></script>
