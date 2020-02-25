@@ -9,7 +9,8 @@ const   gridPoints = [[3,1],[3,2],[3,3],[3,4],[3,5],
                       "infinity","one","two","three","minus",
                       "allClear","zero","addDecimal","equals","add"];                         // button element ids
 let currentNumber, processText, calcComplete, sign,
-memFull = false, memStore = 0, chaosMode = false, buttonOrder;
+memFull = false, memStore = 0, chaosMode = false, buttonOrder, 
+memBackground = document.getElementById("memStatus"), memUpdate = document.getElementById("updateColour");
 
 allClear();                     // Initialise the calculator
 
@@ -118,17 +119,21 @@ function infinity() {
 
 // MEMORY FUNCTIONS
 
-function memAdd() { //TODO add animation to memStatus. https://css-tricks.com/controlling-css-animations-transitions-javascript/
+function memAdd() { 
     if (currentNumber > 0 && currentNumber !== 'Stop it.') {                    // If there's something to save into memory...
         calculate();
-        document.getElementById("memStatus").style.backgroundColor = '#33CC00'; // ... set colour of memory status to show when memory is in use and...
+        memUpdate.classList.add("add-to-memory");
+        setTimeout(function(){
+            memBackground.style.backgroundColor = '#33CC00'
+            memUpdate.classList.remove("add-to-memory");
+        }, 1000);                                                               // ... set colour of memory status to show when memory is in use and...
         memStore     = sign + currentNumber;                                    // ... store current number
         calcComplete = true;
     }
 }
 
 function memRecall() { // reverse animation for number to return to screen?
-    if (memStore !== 0) {                       // If there's something to recall...
+    if (memStore > 0 || memStore < 0) {         // If there's something to recall...
         currentNumber = Math.abs(memStore);     // ... display stored number (with sign removed from this display if negative...
         memStore < 0 ? invSign() : memStore;    // ... and in that case make the sign negative)
         calcComplete  = true;
@@ -137,8 +142,14 @@ function memRecall() { // reverse animation for number to return to screen?
 }
 
 function memClear() {   // reset memory
+    if (memStore > 0 || memStore < 0) {
+        memUpdate.classList.add("remove-from-memory");
+        setTimeout(function(){
+            memBackground.style.backgroundColor = '#B11100'
+            memUpdate.classList.remove("remove-from-memory");
+        }, 1000);     
+    }
     memStore = '0';
-    document.getElementById("memStatus").style.backgroundColor = '#B11100';
 }
 
 function backspace(){
@@ -164,9 +175,9 @@ function sqRt() {
             roundNumber();
         }
         currentNumber == 6.4807407 ? chaosMode = !chaosMode : chaosMode;  // At the root of the meaning of life is chaos
-        processText = '';
         calcComplete = true;
         updateDisplay();
+        processText = '';
     }
 }
 
@@ -195,7 +206,6 @@ function calculate() {
             updateDisplay();
             currentNumber = 0;
         }
-
         calcComplete = true;
     }
 }
