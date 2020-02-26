@@ -27,19 +27,27 @@ I first sketched out the skeleton of what I wanted for the HTML framework, and t
 
 ![My first calculator sketch](https://github.com/jackherizsmith/calculator/blob/master/Calc%20sketch.jpeg)
 
-It behaves slightly differently on mobile - where the focus on a button is when it is clicked rather than hovered over (which is not a useful state on mobile). You also access the stored number in memory in the same way (clicking rather than hovering).
+It behaves slightly differently on mobile - where the focus on a button is when it is clicked rather than hovered over (which is not a useful state on mobile). 
 
-Previously I had a simple colour change for I need to add
+Each calculation takes the process, sign and current number and evaulates it in the following way: 
 
-Each calculation takes the process, sign and current number and evaulates it in the following way 
 `currentNumber = eval(processText + sign + currentNumber)`
 
 > "eval() ... evaluates JavaScript code represented as a string." ~ [_MDN web docs_](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/eval)
 
+Previously I had a simple colour change for adding to or removing from memory, which was problematic when overwriting an existing stored value as thre was no feedback for the user to identify the update. Therefore, the top left panel labelled `M` has three layers:
+* a base layer that changes colour depending on whether or not there is a number stored in memory
+* a circular layer that grows to cover the base layer by animating when the M+ or MC buttons are pressed (see [lines 86 - 125](https://github.com/jackherizsmith/calculator/blob/master/styles.css))
+* a layer that sits over everything, simply with the button label `M`.
+
+Finally, the number stored in memory can be found by hovering over the `M`, or by clicking on mobile. This is done by using tooltips, and has been implemented in a way that is fine but definitely needs more thought to be truly valuable. It is definitely more valuable in its current form than not having it at all. 
+
 ### Accessibility
 Where possible the font size has been set to the maximum within the available space. I have restricted user resizing which could be a problem for people who need to zoom in, especially on smaller screens.
 
-The colour scheme is very pleasing, but more importantly the colours pass WCAG readability / contrast tests and colourblindness assessment.
+The colour scheme is very pleasing, but more importantly it passes WCAG readability / contrast tests and colourblindness assessment.
+
+I'm not confident that I have effectively implemented what I learned about semantic HTML, but I have treid by using `<label>` instead of `<div>`.
 
 ## Further considerations
 I only allow selection on the current number, which is to make copying the calculated number straightforward. There are at least two issues with this:
