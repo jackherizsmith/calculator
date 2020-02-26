@@ -27,7 +27,14 @@ I first sketched out the skeleton of what I wanted for the HTML framework, and t
 
 ![My first calculator sketch](https://github.com/jackherizsmith/calculator/blob/master/Calc%20sketch.jpeg)
 
-It behaves slightly differently on mobile - where the focus on a button is when it is clicked rather than hovered over (which is not a useful state on mobile).
+It behaves slightly differently on mobile - where the focus on a button is when it is clicked rather than hovered over (which is not a useful state on mobile). You also access the stored number in memory in the same way (clicking rather than hovering).
+
+Previously I had a simple colour change for I need to add
+
+Each calculation takes the process, sign and current number and evaulates it in the following way 
+`currentNumber = eval(processText + sign + currentNumber)`
+
+> "eval() ... evaluates JavaScript code represented as a string." ~ [_MDN web docs_](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/eval)
 
 ### Accessibility
 Where possible the font size has been set to the maximum within the available space. I have restricted user resizing which could be a problem for people who need to zoom in, especially on smaller screens.
