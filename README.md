@@ -9,7 +9,7 @@ You can see it here on the left - it is based on a real calculator that is simil
 ## Using my calculator
 This calculator works intuitively by clicking the buttons you want, hopefully no matter what device you are using. If on desktop, you can also use the keyboard. Because the calculations are processed as you go, the total is accummulated e.g. `5 + 7 +` displays as `12 +`.
 
-You can change your mind when using the calculator, using the backspace for errors in typing the number or just changing the operator. Clicking minus also prepares your input number to be negative, so that you can for example calculate `5 / (- 8)` in the way you'd expect.
+You can change your mind when using the calculator, using the backspace for errors in typing the number or just changing the operator for example when showing `54 *` pressing the divide button updates your calculation to `54 /`. Clicking subtract when there is no number to operate on also prepares your input number to be negative, so that you can for example calculate `5 / (- 8)` in the way you're familiar with.
 
 The memory buttons that are (almost always) along the top of the keyboard help you add, recall, and clear numbers from past calculations.
 
