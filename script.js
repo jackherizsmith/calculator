@@ -137,7 +137,8 @@ function memAdd() {         // PURPOSE: add current / calculated number to memor
             memUpdate.classList.remove("add-to-memory");        // - remove the class so it can be rerun in the future
         }, 800);                                                // Length of animation 
         memStore     = sign + currentNumber;                    // Store current number
-        //document.getElementById("memoryValue").innerHTML = memStore;  // Update hidden text to indicate what value is stored in memory  
+        memBackground.classList.add("tooltip");                 // Add class to access stored number with hover (PC) or click (mobile)
+        document.getElementById("memoryValue").innerHTML = memStore;  // Update hidden text to indicate what number is stored in memory  
         calcComplete = true;
     }
 }
@@ -157,7 +158,9 @@ function memClear() {   // PURPOSE: Clear stored number in memory
         setTimeout(function(){
             memBackground.style.backgroundColor = '#B11100';
             memUpdate.classList.remove("remove-from-memory");
-        }, 800);     
+        }, 800);  
+        memBackground.classList.remove("tooltip");
+        document.getElementById("memoryValue").innerHTML = '';  // Remove hidden number  
     }
     memStore = '0';
 }
