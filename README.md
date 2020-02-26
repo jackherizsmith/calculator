@@ -25,6 +25,8 @@ You can do quite a lot with this calculator:
 ## Design process
 I first sketched out the skeleton of what I wanted for the HTML framework, and then added some basic CSS to go back to once I had JavaScript working. I ended up more or less sticking with this original style in the end as I quite like the simple aesthetic.
 
+![My first calculator sketch](https://github.com/jackherizsmith/calculator/blob/master/Calc%20sketch.jpeg)
+
 It behaves slightly differently on mobile - where the focus on a button is when it is clicked rather than hovered over (which is not a useful state on mobile).
 
 ### Accessibility
