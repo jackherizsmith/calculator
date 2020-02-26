@@ -38,7 +38,7 @@ Each calculation takes the process, sign and current number and evaulates it in 
 Previously I had a simple colour change for adding to or removing from memory, which was problematic when overwriting an existing stored value as thre was no feedback for the user to identify the update. Therefore, the top left panel labelled `M` has three layers:
 * a base layer that changes colour depending on whether or not there is a number stored in memory
 * a circular layer that grows to cover the base layer by animating when the M+ or MC buttons are pressed (see [lines 86 - 125](https://github.com/jackherizsmith/calculator/blob/master/styles.css))
-* a layer that sits over everything, simply with the button label `M`.
+* a layer that sits over everything, simply with the label `M`.
 
 Finally, the number stored in memory can be found by hovering over the `M`, or by clicking on mobile. This is done by using tooltips, and has been implemented in a way that is fine but definitely needs more thought to be truly valuable. It is definitely more valuable in its current form than not having it at all. 
 
