@@ -8,7 +8,7 @@ const   gridPoints = [[3,1],[3,2],[3,3],[3,4],[3,5],
                       "inverseSign","four","five","six","times",
                       "infinity","one","two","three","minus",
                       "allClear","zero","addDecimal","equals","add"];                         // Button element IDs
-let currentNumber, processText, calcComplete, sign,
+let currentNumber, processText, calcComplete, sign, buttonWidth, buttonHeight,bodyWidth, screenHeight,
 memFull = false, memStore = 0, chaosMode = false, buttonOrder, 
 memBackground = document.getElementById("memStatus"), memUpdate = document.getElementById("updateColour"); // Assigning DOM elements for animation
 
@@ -20,6 +20,14 @@ function allClear() {           // PURPOSE: reset the calculator (except memory 
     currentNumber = '0';
     calcComplete  = true;       // It's important for the calculator to know when the user is likely or unlikely to be part way through a calculation
     updateDisplay();            // Almost all functions conclude by updating the display
+    
+    buttonWidth = document.getElementById("addToMemory").offsetWidth;
+    screenHeight = document.getElementById("calcScreen").offsetHeight;
+    document.getElementById("memShow").style.maxWidth = buttonWidth;
+    document.getElementById("memoryValue").style.marginTop = -screenHeight;
+    
+    bodyWidth = document.getElementById("calculatorBody").offsetWidth;
+    document.getElementById("memoryValue").style.width = bodyWidth;
 }
 
 // MAKING THE DISPLAY WORK
@@ -59,6 +67,16 @@ function roundNumber(){     // PURPOSE: ensure that the number displays properly
         currentNumber > 99999999 ? currentNumber = currentNumber.toPrecision(5) :   // Else if number is huge it's going to start using e+n (where n = 10 ^ n) so need to chop it off sooner (this starts spilling over from e+99 but hits Infinity before e+1000)
         currentNumber = +currentNumber.toPrecision(8);                              // Else it can take up a certain number of characters
     }                                                                               // n.b. '+' forces the variable to be a number, which helps with rounding (e.g. so that 0.1 + 0.2 = 0.3) 
+}
+
+window.onresize = function() {
+    buttonWidth = document.getElementById("addToMemory").offsetWidth;
+    screenHeight = document.getElementById("calcScreen").offsetHeight;
+    bodyWidth = document.getElementById("calculatorBody").offsetWidth;
+
+    document.getElementById("memShow").style.maxWidth = buttonWidth;
+    document.getElementById("memoryValue").style.marginTop = -screenHeight;
+    document.getElementById("memoryValue").style.width = bodyWidth;
 }
 
 // PROCESSING INPUTS
